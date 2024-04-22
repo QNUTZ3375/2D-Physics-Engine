@@ -5,17 +5,17 @@
     <key>CFBundleDevelopmentRegion</key>
     <string>English</string>
     <key>CFBundleExecutable</key>
-    <string>Finding_Contact_Points</string>
+    <string>Physics_Engine</string>
     <key>CFBundleIconFile</key>
     <string>application.icns</string>
     <key>CFBundleIdentifier</key>
-    <string>Finding_Contact_Points</string>
+    <string>Physics_Engine</string>
     <key>CFBundleDisplayName</key>
-    <string>Finding_Contact_Points</string>
+    <string>Physics_Engine</string>
     <key>CFBundleInfoDictionaryVersion</key>
     <string>6.0</string>
     <key>CFBundleName</key>
-    <string>Finding_Contact_Points</string>
+    <string>Physics_Engine</string>
     <key>CFBundlePackageType</key>
     <string>APPL</string>
 
@@ -35,7 +35,7 @@
     
 
     <key>JVMMainClassName</key>
-    <string>Finding_Contact_Points</string>
+    <string>Physics_Engine</string>
 
     <key>JVMVersion</key>
     <string>17</string>
@@ -48,7 +48,7 @@
 
     <key>LSArchitecturePriority</key>
     <array>
-      <string>aarch64</string>
+      <string>x86_64</string>
     </array>
 
     <key>LSEnvironment</key>
@@ -69,7 +69,7 @@
       <string>-Dapple.laf.useScreenMenuBar=true</string>
       <string>-Dcom.apple.macos.use-file-dialog-packages=true</string>
       <string>-Dcom.apple.macos.useScreenMenuBar=true</string>
-      <string>-Dcom.apple.mrj.application.apple.menu.about.name=Finding_Contact_Points</string>
+      <string>-Dcom.apple.mrj.application.apple.menu.about.name=Physics_Engine</string>
       <string>-Dcom.apple.smallTabs=true</string>
     </array>
     <key>JVMArguments</key>
