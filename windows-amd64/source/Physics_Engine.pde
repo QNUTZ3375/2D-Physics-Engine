@@ -33,6 +33,7 @@ long stepTimer = 0; //counts the number of milliseconds between each update
 float currUpdateTime = 0;
 float currSampleCount = 0;
 String stepTimerString = "0.0";
+int terrainOption = 0;
 
 float lengthOfVector(PVector a){
   if(abs(a.x) == 0.0){
@@ -138,6 +139,86 @@ void resetAndUpdateBodies(){
   }
 }
 
+void generateStaticObjects(int configNum){
+  switch(configNum){
+    case 1: 
+      objects = new Shape[3];
+      //float x, float y, color c, boolean movable, float re, float radius, float width_, float height_, String type
+      //bottom floor
+      objects[0] = new Shape(width/2, height - wallThickness * 3, color(0, 150, 0), false, 0.5, 0, width - wallThickness * 4, wallThickness, "Box");
+      objects[0].currAABB = getAABB(objects[0]);
+      //left slope
+      objects[1] = new Shape(300, 450, color(150, 0, 0), false, 0.5, 0, wallThickness * 16, wallThickness, "Box");
+      objects[1].turn(20);
+      objects[1].getTransformedVertices();
+      objects[1].currAABB = getAABB(objects[1]);
+      //right slope
+      objects[2] = new Shape(700, 200, color(150, 150, 150), false, 0.5, 0, wallThickness * 16, wallThickness, "Box");
+      objects[2].turn(-20);
+      objects[2].getTransformedVertices();
+      objects[2].currAABB = getAABB(objects[2]);
+      break;
+    case 2: 
+      objects = new Shape[10];
+      //float x, float y, color c, boolean movable, float re, float radius, float width_, float height_, String type
+      //left steep slope
+      objects[0] = new Shape(55, height/2 - 60, color(0, 150, 150), false, 0.5, 0, height - wallThickness * 18, wallThickness, "Box");
+      objects[0].turn(-95);
+      objects[0].getTransformedVertices();
+      objects[0].currAABB = getAABB(objects[0]);
+      //left slope
+      objects[1] = new Shape(110, height - 280, color(0, 255, 150), false, 0.5, 0, wallThickness * 6, wallThickness, "Box");
+      objects[1].turn(-120);
+      objects[1].getTransformedVertices();
+      objects[1].currAABB = getAABB(objects[1]);
+      //left gradual slope
+      objects[2] = new Shape(222, height - 174, color(150, 0, 0), false, 0.5, 0, wallThickness * 6, wallThickness, "Box");
+      objects[2].turn(20);
+      objects[2].getTransformedVertices();
+      objects[2].currAABB = getAABB(objects[2]);
+      //bottom middle slope (left)
+      objects[3] = new Shape(500, height - 150, color(255, 150, 150), false, 0.5, 0, wallThickness * 14, wallThickness, "Box");
+      objects[3].currAABB = getAABB(objects[3]);
+      //bottom right gradual slope
+      objects[4] = new Shape(width - 222, height - 174, color(255, 150, 0), false, 0.5, 0, wallThickness * 6, wallThickness, "Box");
+      objects[4].turn(-20);
+      objects[4].getTransformedVertices();
+      objects[4].currAABB = getAABB(objects[4]);
+      
+      //right steep slope
+      objects[5] = new Shape(width - 157, height/2 - 240, color(150, 150, 0), false, 0.5, 0, height - wallThickness * 22, wallThickness, "Box");
+      objects[5].turn(95);
+      objects[5].getTransformedVertices();
+      objects[5].currAABB = getAABB(objects[5]);
+      //right slope
+      objects[6] = new Shape(width - 210, height - 500, color(150, 255, 0), false, 0.5, 0, wallThickness * 6, wallThickness, "Box");
+      objects[6].turn(120);
+      objects[6].getTransformedVertices();
+      objects[6].currAABB = getAABB(objects[6]);
+      //right gradual slope
+      objects[7] = new Shape(width - 322, height - 394, color(0, 0, 150), false, 0.5, 0, wallThickness * 6, wallThickness, "Box");
+      objects[7].turn(-20);
+      objects[7].getTransformedVertices();
+      objects[7].currAABB = getAABB(objects[7]);
+      //bottom middle slope (right)
+      objects[8] = new Shape(width - 500, height - 370, color(150, 150, 255), false, 0.5, 0, wallThickness * 8, wallThickness, "Box");
+      objects[8].currAABB = getAABB(objects[8]);
+      
+      
+      //top middle slope
+      objects[9] = new Shape(400, 200, color(150, 150, 150), false, 0.5, 0, wallThickness * 16, wallThickness, "Box");
+      objects[9].turn(-20);
+      objects[9].getTransformedVertices();
+      objects[9].currAABB = getAABB(objects[9]);
+      break;
+    default:
+      objects = new Shape[1];
+      //bottom floor
+      objects[0] = new Shape(width/2, height - wallThickness * 3, color(0, 150, 0), false, 0.5, 0, width - wallThickness * 4, wallThickness, "Box");
+      objects[0].currAABB = getAABB(objects[0]);
+  }
+}
+
 void setup(){
   size(1000, 800);
   stroke(250);
@@ -146,22 +227,7 @@ void setup(){
   textFont(metricsDisplay, 20);
   rectMode(CENTER);
   
-  objects = new Shape[3];
-  
-  //float x, float y, color c, boolean movable, float re, float radius, float width_, float height_, String type
-  //bottom floor
-  objects[0] = new Shape(width/2, height - wallThickness * 3, color(0, 150, 0), false, 0.5, 0, width - wallThickness * 4, wallThickness, "Box");
-  objects[0].currAABB = getAABB(objects[0]);
-  //left slope
-  objects[1] = new Shape(300, 450, color(150, 0, 0), false, 0.5, 0, wallThickness * 16, wallThickness, "Box");
-  objects[1].turn(20);
-  objects[1].getTransformedVertices();
-  objects[1].currAABB = getAABB(objects[1]);
-  //right slope
-  objects[2] = new Shape(700, 200, color(150, 150, 150), false, 0.5, 0, wallThickness * 16, wallThickness, "Box");
-  objects[2].turn(-20);
-  objects[2].getTransformedVertices();
-  objects[2].currAABB = getAABB(objects[2]);
+  generateStaticObjects(terrainOption);
 }
 
 void draw(){
@@ -218,6 +284,18 @@ void keyPressed(){
     objects = Arrays.copyOf(objects, objects.length + 1);
     objects[objects.length - 1] = new Shape(mouseX, mouseY, colors[int(random(colors.length))], true, 0.5, r, 0, 0, "Circle");
     objects[objects.length - 1].currAABB = getAABB(objects[objects.length - 1]);
+  }
+  if(key == 'c'){
+    objects = Arrays.copyOf(objects, 0);
+    generateStaticObjects(terrainOption);
+  }
+  if(keyCode == RIGHT){
+    terrainOption = (terrainOption + 1) % 3;
+    generateStaticObjects(terrainOption);
+  }
+  if(keyCode == LEFT){
+    terrainOption = (terrainOption - 1) % 3;
+    generateStaticObjects(terrainOption);
   }
 }
 
